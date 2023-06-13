@@ -1,42 +1,47 @@
-def ASSIGNMENT(new_list, i, old_list, j):
-    new_list[i] = old_list[j]
+def switch_list_elements(new_list, new_list_index, old_list, old_list_index): # name change function and variables [1,2]
+    new_list[new_list_index] = old_list[old_list_index]
 
 
-def mergeSort(list_to_sort_by_merge):
-    if (
-        len(list_to_sort_by_merge) > 1
-        and not len(list_to_sort_by_merge) < 1
-        and len(list_to_sort_by_merge) != 0
-    ):
-        mid = len(list_to_sort_by_merge) // 2
-        left = list_to_sort_by_merge[:mid]
-        right = list_to_sort_by_merge[mid:]
+def execute_mergeSort(list_to_sort_by_merge): # name change function [3]
+    if len(list_to_sort_by_merge) > 1: # remove useless conditions and brackets [4]
+        
+        middle_index = len(list_to_sort_by_merge) // 2 # name change variable [5]
+        left_half_list = list_to_sort_by_merge[:middle_index] # name change variable [6]
+        right_half_list = list_to_sort_by_merge[middle_index:] # name change variable [7]
 
-        mergeSort(left)
-        mergeSort(right)
+        execute_mergeSort(left_half_list)
+        execute_mergeSort(right_half_list)
 
-        l = 0
-        r = 0
-        i = 0
+        left_index = 0 # name change variable [8]
+        right_index = 0 # name change variable [9]
+        shared_index = 0 # name change variable [10]
 
-        while l < len(left) and r < len(right):
-            if left[l] <= right[r]:
-                ASSIGNMENT(new_list=list_to_sort_by_merge, i=i, old_list=left, j=l)
-                l += 1
+        while left_index < len(left_half_list) and right_index < len(right_half_list):
+            if left_half_list[left_index] <= right_half_list[right_index]:
+                switch_list_elements(new_list=list_to_sort_by_merge, 
+                                     new_list_index=shared_index, 
+                                     old_list=left_half_list, 
+                                     old_list_index=left_index
+                                    )
+                left_index += 1
             else:
-                ASSIGNMENT(new_list=list_to_sort_by_merge, i=i, old_list=right, j=r)
-                r += 1
-            i += 1
+                switch_list_elements(new_list=list_to_sort_by_merge, 
+                                     new_list_index=shared_index, 
+                                     old_list=right_half_list, 
+                                     old_list_index=right_index
+                                    )
+                right_index += 1
+            shared_index += 1
 
-        while l < len(left):
-            list_to_sort_by_merge[i] = left[l]
-            l += 1
-            i += 1
+        while left_index < len(left_half_list):
+            list_to_sort_by_merge[shared_index] = left_half_list[left_index]
+            left_index += 1
+            shared_index += 1
 
-        while r < len(right):
-            list_to_sort_by_merge[i] = right[r]
-            r += 1
-            i += 1
+        while right_index < len(right_half_list):
+            list_to_sort_by_merge[shared_index] = right_half_list[right_index]
+            right_index += 1
+            shared_index += 1
 
 
 import matplotlib.pyplot as plt
