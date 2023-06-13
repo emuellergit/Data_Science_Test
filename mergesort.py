@@ -47,12 +47,21 @@ def execute_mergeSort(list_to_sort_by_merge): # name change function [3]
 import matplotlib.pyplot as plt
 
 my_list = [54, 26, 93, 17, 77, 31, 44, 55, 20]
-my_list_index_sequence = range(len(my_list)) # name change variables [11]
+my_list_index_sequence = range(len(my_list)) 
 
-plt.plot(my_list_index_sequence, my_list)
+plt.scatter(my_list_index_sequence, my_list)
+plt.bar(my_list_index_sequence, my_list, width=0.16, align='center', alpha=0.5)
+plt.xlabel('Indices')
+plt.ylabel('List values')
+plt.title('Unsorted List Values vs. Indices')
+plt.grid(lw=.7)
 plt.show()
 
-execute_mergeSort(my_list)
-                            # remove useless/doubled code [12]
-plt.plot(my_list_index_sequence, my_list)
+merge_sort(my_list)
+plt.scatter(my_list_index_sequence, my_list)
+plt.bar(my_list_index_sequence, my_list, width=0.16, align='center', alpha=0.5)
+plt.xlabel('Indices')
+plt.ylabel('List values')
+plt.title('Sorted List Values vs. Indices')
+plt.grid(lw=.7)
 plt.show()
